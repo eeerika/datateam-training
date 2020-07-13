@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Example Solr queries | NCEAS Data Team Reference Guide</title>
+  <meta name="description" content="This is a training guide and reference resource for NCEAS data team members working on the SASAP and Arctic Data Center projects" />
+  <meta name="generator" content="bookdown 0.20.1 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Example Solr queries | NCEAS Data Team Reference Guide" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a training guide and reference resource for NCEAS data team members working on the SASAP and Arctic Data Center projects" />
+  <meta name="github-repo" content="NCEAS/datateam-training" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Example Solr queries | NCEAS Data Team Reference Guide" />
+  
+  <meta name="twitter:description" content="This is a training guide and reference resource for NCEAS data team members working on the SASAP and Arctic Data Center projects" />
+  
+
+
+
+<meta name="date" content="2020-07-13" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<link rel="prev" href="use-stats.html"/>
+<link rel="next" href="more-resources.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="../styles.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Data Team Reference Guide</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="chapter" data-level="" data-path="miscellaneous.html"><a href="miscellaneous.html"><i class="fa fa-check"></i>Miscellaneous</a><ul>
+<li class="chapter" data-level="" data-path="cyberduck-instructions.html"><a href="cyberduck-instructions.html"><i class="fa fa-check"></i>Cyberduck instructions</a></li>
+<li class="chapter" data-level="" data-path="file-paths.html"><a href="file-paths.html"><i class="fa fa-check"></i>File paths</a><ul>
+<li class="chapter" data-level="" data-path="file-paths.html"><a href="file-paths.html#remote-files-vs.local-files"><i class="fa fa-check"></i>Remote files vs. local files</a></li>
+<li class="chapter" data-level="" data-path="file-paths.html"><a href="file-paths.html#file-path-shortcuts"><i class="fa fa-check"></i>File path shortcuts</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="metacat-version.html"><a href="metacat-version.html"><i class="fa fa-check"></i>Metacat version</a></li>
+<li class="chapter" data-level="" data-path="resources-for-r.html"><a href="resources-for-r.html"><i class="fa fa-check"></i>Resources for R</a><ul>
+<li class="chapter" data-level="" data-path="resources-for-r.html"><a href="resources-for-r.html#packages"><i class="fa fa-check"></i>Packages</a></li>
+<li class="chapter" data-level="" data-path="resources-for-r.html"><a href="resources-for-r.html#learning"><i class="fa fa-check"></i>Learning</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="edit-data-packages.html"><a href="edit-data-packages.html"><i class="fa fa-check"></i>Edit data packages</a><ul>
+<li class="chapter" data-level="" data-path="add-a-pre-generated-identifier-to-the-eml.html"><a href="add-a-pre-generated-identifier-to-the-eml.html"><i class="fa fa-check"></i>Add a pre-generated identifier to the EML</a></li>
+<li class="chapter" data-level="" data-path="create-a-resource-map.html"><a href="create-a-resource-map.html"><i class="fa fa-check"></i>Create a resource map</a></li>
+<li class="chapter" data-level="" data-path="edit-sysmeta.html"><a href="edit-sysmeta.html"><i class="fa fa-check"></i>Edit sysmeta</a><ul>
+<li class="chapter" data-level="" data-path="edit-sysmeta.html"><a href="edit-sysmeta.html#identifiers-and-sysmeta"><i class="fa fa-check"></i>Identifiers and sysmeta</a></li>
+<li class="chapter" data-level="" data-path="edit-sysmeta.html"><a href="edit-sysmeta.html#additional-resources"><i class="fa fa-check"></i>Additional resources</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="get-package-and-eml.html"><a href="get-package-and-eml.html"><i class="fa fa-check"></i>Get package and EML</a></li>
+<li class="chapter" data-level="" data-path="obsolescence-chain.html"><a href="obsolescence-chain.html"><i class="fa fa-check"></i>Obsolescence chain</a></li>
+<li class="chapter" data-level="" data-path="publish-an-object.html"><a href="publish-an-object.html"><i class="fa fa-check"></i>Publish an object</a></li>
+<li class="chapter" data-level="" data-path="set-dataone-nodes.html"><a href="set-dataone-nodes.html"><i class="fa fa-check"></i>Set DataONE nodes</a><ul>
+<li class="chapter" data-level="" data-path="set-dataone-nodes.html"><a href="set-dataone-nodes.html#staging-test-nodes"><i class="fa fa-check"></i>Staging (Test) nodes</a></li>
+<li class="chapter" data-level="" data-path="set-dataone-nodes.html"><a href="set-dataone-nodes.html#production-nodes"><i class="fa fa-check"></i>Production nodes</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="set-rights-and-access.html"><a href="set-rights-and-access.html"><i class="fa fa-check"></i>Set rights and access</a><ul>
+<li class="chapter" data-level="" data-path="set-rights-and-access.html"><a href="set-rights-and-access.html#my-profile"><i class="fa fa-check"></i>My profile</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="show-indexing-status.html"><a href="show-indexing-status.html"><i class="fa fa-check"></i>Show indexing status</a></li>
+<li class="chapter" data-level="" data-path="update-a-package-with-a-new-data-object.html"><a href="update-a-package-with-a-new-data-object.html"><i class="fa fa-check"></i>Update a package with a new data object</a><ul>
+<li class="chapter" data-level="" data-path="update-a-package-with-a-new-data-object.html"><a href="update-a-package-with-a-new-data-object.html#publish-update"><i class="fa fa-check"></i>Publish update</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="update-a-data-object.html"><a href="update-a-data-object.html"><i class="fa fa-check"></i>Update a data object</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="explore-eml.html"><a href="explore-eml.html"><i class="fa fa-check"></i>Explore EML</a><ul>
+<li class="chapter" data-level="" data-path="access-specific-elements.html"><a href="access-specific-elements.html"><i class="fa fa-check"></i>Access specific elements</a></li>
+<li class="chapter" data-level="" data-path="navigate-through-eml.html"><a href="navigate-through-eml.html"><i class="fa fa-check"></i>Navigate through EML</a></li>
+<li class="chapter" data-level="" data-path="understand-the-eml-schema.html"><a href="understand-the-eml-schema.html"><i class="fa fa-check"></i>Understand the EML schema</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="edit-eml.html"><a href="edit-eml.html"><i class="fa fa-check"></i>Edit EML</a><ul>
+<li class="chapter" data-level="" data-path="edit-an-eml-element.html"><a href="edit-an-eml-element.html"><i class="fa fa-check"></i>Edit an EML element</a><ul>
+<li class="chapter" data-level="" data-path="edit-an-eml-element.html"><a href="edit-an-eml-element.html#edit-eml-with-strings"><i class="fa fa-check"></i>Edit EML with strings</a></li>
+<li class="chapter" data-level="" data-path="edit-an-eml-element.html"><a href="edit-an-eml-element.html#edit-eml-with-the-eml-package"><i class="fa fa-check"></i>Edit EML with the “EML” package</a></li>
+<li class="chapter" data-level="" data-path="edit-an-eml-element.html"><a href="edit-an-eml-element.html#edit-eml-with-objects"><i class="fa fa-check"></i>Edit EML with objects</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="edit-attributelists.html"><a href="edit-attributelists.html"><i class="fa fa-check"></i>Edit attributeLists</a><ul>
+<li class="chapter" data-level="" data-path="edit-attributelists.html"><a href="edit-attributelists.html#edit-attributes"><i class="fa fa-check"></i>Edit attributes</a></li>
+<li class="chapter" data-level="" data-path="edit-attributelists.html"><a href="edit-attributelists.html#edit-custom-units"><i class="fa fa-check"></i>Edit custom units</a></li>
+<li class="chapter" data-level="" data-path="edit-attributelists.html"><a href="edit-attributelists.html#edit-factors"><i class="fa fa-check"></i>Edit factors</a></li>
+<li class="chapter" data-level="" data-path="edit-attributelists.html"><a href="edit-attributelists.html#finalize-attributelist"><i class="fa fa-check"></i>Finalize attributeList</a></li>
+<li class="chapter" data-level="" data-path="edit-attributelists.html"><a href="edit-attributelists.html#edit-custom-units-1"><i class="fa fa-check"></i>Edit custom units</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="edit-datatables.html"><a href="edit-datatables.html"><i class="fa fa-check"></i>Edit dataTables</a></li>
+<li class="chapter" data-level="" data-path="edit-otherentities.html"><a href="edit-otherentities.html"><i class="fa fa-check"></i>Edit otherEntities</a><ul>
+<li class="chapter" data-level="" data-path="edit-otherentities.html"><a href="edit-otherentities.html#remove-otherentities"><i class="fa fa-check"></i>Remove otherEntities</a></li>
+<li class="chapter" data-level="" data-path="edit-otherentities.html"><a href="edit-otherentities.html#create-otherentities"><i class="fa fa-check"></i>Create otherEntities</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="edit-spatial-data.html"><a href="edit-spatial-data.html"><i class="fa fa-check"></i>Edit spatial data</a><ul>
+<li class="chapter" data-level="" data-path="edit-spatial-data.html"><a href="edit-spatial-data.html#reading-spatial-files"><i class="fa fa-check"></i>Reading Spatial Files</a></li>
+<li class="chapter" data-level="" data-path="edit-spatial-data.html"><a href="edit-spatial-data.html#spatialvector"><i class="fa fa-check"></i>spatialVector</a></li>
+<li class="chapter" data-level="" data-path="edit-spatial-data.html"><a href="edit-spatial-data.html#spatialrasters"><i class="fa fa-check"></i>spatialRasters</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="format-text-in-eml.html"><a href="format-text-in-eml.html"><i class="fa fa-check"></i>Format text in EML</a><ul>
+<li class="chapter" data-level="" data-path="format-text-in-eml.html"><a href="format-text-in-eml.html#type-setting"><i class="fa fa-check"></i>Type-setting</a></li>
+<li class="chapter" data-level="" data-path="format-text-in-eml.html"><a href="format-text-in-eml.html#links"><i class="fa fa-check"></i>Links</a></li>
+<li class="chapter" data-level="" data-path="format-text-in-eml.html"><a href="format-text-in-eml.html#lists"><i class="fa fa-check"></i>Lists</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="series-identifier-sid.html"><a href="series-identifier-sid.html"><i class="fa fa-check"></i>Series Identifier (SID)</a><ul>
+<li class="chapter" data-level="" data-path="series-identifier-sid.html"><a href="series-identifier-sid.html#adding-a-sid-to-a-package"><i class="fa fa-check"></i>Adding a SID to a package</a></li>
+<li class="chapter" data-level="" data-path="series-identifier-sid.html"><a href="series-identifier-sid.html#updating-the-child-packages-of-a-parent-package-with-a-sid"><i class="fa fa-check"></i>Updating the child packages of a parent package with a SID</a></li>
+<li class="chapter" data-level="" data-path="series-identifier-sid.html"><a href="series-identifier-sid.html#updating-the-metadata-of-a-package-with-a-sid"><i class="fa fa-check"></i>Updating the metadata of a package with a SID</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="set-coverages.html"><a href="set-coverages.html"><i class="fa fa-check"></i>Set coverages</a></li>
+<li class="chapter" data-level="" data-path="set-methods.html"><a href="set-methods.html"><i class="fa fa-check"></i>Set methods</a><ul>
+<li class="chapter" data-level="" data-path="set-methods.html"><a href="set-methods.html#adding-sampling-info-to-methods-section"><i class="fa fa-check"></i>Adding sampling info to methods section</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="set-parties.html"><a href="set-parties.html"><i class="fa fa-check"></i>Set parties</a></li>
+<li class="chapter" data-level="" data-path="set-physical.html"><a href="set-physical.html"><i class="fa fa-check"></i>Set physical</a></li>
+<li class="chapter" data-level="" data-path="set-the-project-section.html"><a href="set-the-project-section.html"><i class="fa fa-check"></i>Set the Project section</a></li>
+<li class="chapter" data-level="" data-path="use-references.html"><a href="use-references.html"><i class="fa fa-check"></i>Use references</a><ul>
+<li class="chapter" data-level="" data-path="use-references.html"><a href="use-references.html#example-with-parties"><i class="fa fa-check"></i>Example with parties</a></li>
+<li class="chapter" data-level="" data-path="use-references.html"><a href="use-references.html#example-with-attributes"><i class="fa fa-check"></i>Example with attributes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="nesting-data.html"><a href="nesting-data.html"><i class="fa fa-check"></i>Nesting Data</a><ul>
+<li class="chapter" data-level="" data-path="nesting-a-data-package.html"><a href="nesting-a-data-package.html"><i class="fa fa-check"></i>Nesting a data package</a></li>
+<li class="chapter" data-level="" data-path="add-children-to-an-existing-parent.html"><a href="add-children-to-an-existing-parent.html"><i class="fa fa-check"></i>Add children to an existing parent</a></li>
+<li class="chapter" data-level="" data-path="create-a-new-parent-package.html"><a href="create-a-new-parent-package.html"><i class="fa fa-check"></i>Create a new parent package</a></li>
+<li class="chapter" data-level="" data-path="example.html"><a href="example.html"><i class="fa fa-check"></i>Example</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pi-correspondence.html"><a href="pi-correspondence.html"><i class="fa fa-check"></i>PI correspondence</a><ul>
+<li class="chapter" data-level="" data-path="email-templates.html"><a href="email-templates.html"><i class="fa fa-check"></i>Email templates</a><ul>
+<li class="chapter" data-level="" data-path="email-templates.html"><a href="email-templates.html#initial-email-template"><i class="fa fa-check"></i>Initial email template</a></li>
+<li class="chapter" data-level="" data-path="email-templates.html"><a href="email-templates.html#comment-templates-based-on-what-is-missing"><i class="fa fa-check"></i>Comment templates based on what is missing</a></li>
+<li class="chapter" data-level="" data-path="email-templates.html"><a href="email-templates.html#final-email-templates"><i class="fa fa-check"></i>Final email templates</a></li>
+<li class="chapter" data-level="" data-path="email-templates.html"><a href="email-templates.html#additional-email-templates"><i class="fa fa-check"></i>Additional email templates</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pi-faq-email-templates.html"><a href="pi-faq-email-templates.html"><i class="fa fa-check"></i>PI FAQ email templates</a><ul>
+<li class="chapter" data-level="" data-path="pi-faq-email-templates.html"><a href="pi-faq-email-templates.html#data-1"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="" data-path="pi-faq-email-templates.html"><a href="pi-faq-email-templates.html#access"><i class="fa fa-check"></i>Access</a></li>
+<li class="chapter" data-level="" data-path="pi-faq-email-templates.html"><a href="pi-faq-email-templates.html#non-nsf"><i class="fa fa-check"></i>non-NSF</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="good-examples-of-data-packages.html"><a href="good-examples-of-data-packages.html"><i class="fa fa-check"></i>Good Examples of data packages</a></li>
+<li class="chapter" data-level="" data-path="final-checklist.html"><a href="final-checklist.html"><i class="fa fa-check"></i>Final Checklist</a><ul>
+<li class="chapter" data-level="" data-path="final-checklist.html"><a href="final-checklist.html#system-metadata"><i class="fa fa-check"></i>System Metadata</a></li>
+<li class="chapter" data-level="" data-path="final-checklist.html"><a href="final-checklist.html#general-eml"><i class="fa fa-check"></i>General EML</a></li>
+<li class="chapter" data-level="" data-path="final-checklist.html"><a href="final-checklist.html#title-1"><i class="fa fa-check"></i>Title</a></li>
+<li class="chapter" data-level="" data-path="final-checklist.html"><a href="final-checklist.html#abstract-1"><i class="fa fa-check"></i>Abstract</a></li>
+<li class="chapter" data-level="" data-path="final-checklist.html"><a href="final-checklist.html#datatable-otherentity-spatialvectors"><i class="fa fa-check"></i>DataTable / OtherEntity / SpatialVectors</a></li>
+<li class="chapter" data-level="" data-path="final-checklist.html"><a href="final-checklist.html#people"><i class="fa fa-check"></i>People</a></li>
+<li class="chapter" data-level="" data-path="final-checklist.html"><a href="final-checklist.html#geographic-region"><i class="fa fa-check"></i>Geographic region</a></li>
+<li class="chapter" data-level="" data-path="final-checklist.html"><a href="final-checklist.html#project"><i class="fa fa-check"></i>Project</a></li>
+<li class="chapter" data-level="" data-path="final-checklist.html"><a href="final-checklist.html#methods-1"><i class="fa fa-check"></i>Methods</a></li>
+<li class="chapter" data-level="" data-path="final-checklist.html"><a href="final-checklist.html#check-eml-version"><i class="fa fa-check"></i>Check EML Version</a></li>
+<li class="chapter" data-level="" data-path="final-checklist.html"><a href="final-checklist.html#access-1"><i class="fa fa-check"></i>Access</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="initial-review-checklist.html"><a href="initial-review-checklist.html"><i class="fa fa-check"></i>Initial review checklist</a></li>
+<li class="chapter" data-level="" data-path="navigate-rt.html"><a href="navigate-rt.html"><i class="fa fa-check"></i>Navigate RT</a><ul>
+<li class="chapter" data-level="" data-path="navigate-rt.html"><a href="navigate-rt.html#front-page"><i class="fa fa-check"></i>Front page</a></li>
+<li class="chapter" data-level="" data-path="navigate-rt.html"><a href="navigate-rt.html#all-tickets"><i class="fa fa-check"></i>All tickets</a></li>
+<li class="chapter" data-level="" data-path="navigate-rt.html"><a href="navigate-rt.html#example-ticket"><i class="fa fa-check"></i>Example ticket</a></li>
+<li class="chapter" data-level="" data-path="navigate-rt.html"><a href="navigate-rt.html#new-data-submission"><i class="fa fa-check"></i>New data submission</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="miscellaneous-file-types.html"><a href="miscellaneous-file-types.html"><i class="fa fa-check"></i>Miscellaneous file types</a><ul>
+<li class="chapter" data-level="" data-path="datalogger-files.html"><a href="datalogger-files.html"><i class="fa fa-check"></i>Datalogger files</a></li>
+<li class="chapter" data-level="" data-path="netcdfs.html"><a href="netcdfs.html"><i class="fa fa-check"></i>NetCDFs</a></li>
+<li class="chapter" data-level="" data-path="spatial-data.html"><a href="spatial-data.html"><i class="fa fa-check"></i>Spatial data</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="wrangle-data.html"><a href="wrangle-data.html"><i class="fa fa-check"></i>Wrangle data</a><ul>
+<li class="chapter" data-level="" data-path="clean-column-names.html"><a href="clean-column-names.html"><i class="fa fa-check"></i>Clean column names</a></li>
+<li class="chapter" data-level="" data-path="fix-excel-dates.html"><a href="fix-excel-dates.html"><i class="fa fa-check"></i>Fix Excel dates</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="solr-queries.html"><a href="solr-queries.html"><i class="fa fa-check"></i>Solr queries</a><ul>
+<li class="chapter" data-level="" data-path="construct-a-query.html"><a href="construct-a-query.html"><i class="fa fa-check"></i>Construct a query</a></li>
+<li class="chapter" data-level="" data-path="query-solr-via-a-browser.html"><a href="query-solr-via-a-browser.html"><i class="fa fa-check"></i>Query Solr via a browser</a></li>
+<li class="chapter" data-level="" data-path="query-solr-via-r.html"><a href="query-solr-via-r.html"><i class="fa fa-check"></i>Query Solr via R</a></li>
+<li class="chapter" data-level="" data-path="use-facets.html"><a href="use-facets.html"><i class="fa fa-check"></i>Use facets</a></li>
+<li class="chapter" data-level="" data-path="use-stats.html"><a href="use-stats.html"><i class="fa fa-check"></i>Use stats</a></li>
+<li class="chapter" data-level="" data-path="example-solr-queries.html"><a href="example-solr-queries.html"><i class="fa fa-check"></i>Example Solr queries</a><ul>
+<li class="chapter" data-level="" data-path="example-solr-queries.html"><a href="example-solr-queries.html#find-everything"><i class="fa fa-check"></i>Find everything</a></li>
+<li class="chapter" data-level="" data-path="example-solr-queries.html"><a href="example-solr-queries.html#query-a-wildcard-expression"><i class="fa fa-check"></i>Query a wildcard expression</a></li>
+<li class="chapter" data-level="" data-path="example-solr-queries.html"><a href="example-solr-queries.html#query-multiple-fields"><i class="fa fa-check"></i>Query multiple fields</a></li>
+<li class="chapter" data-level="" data-path="example-solr-queries.html"><a href="example-solr-queries.html#query-by-formattype"><i class="fa fa-check"></i>Query by formatType</a></li>
+<li class="chapter" data-level="" data-path="example-solr-queries.html"><a href="example-solr-queries.html#query-pids-by-a-specific-submitter"><i class="fa fa-check"></i>Query pids by a specific submitter</a></li>
+<li class="chapter" data-level="" data-path="example-solr-queries.html"><a href="example-solr-queries.html#query-pids-with-special-characters"><i class="fa fa-check"></i>Query pids with special characters</a></li>
+<li class="chapter" data-level="" data-path="example-solr-queries.html"><a href="example-solr-queries.html#query-multiple-conditions-within-one-field"><i class="fa fa-check"></i>Query multiple conditions within one field</a></li>
+<li class="chapter" data-level="" data-path="example-solr-queries.html"><a href="example-solr-queries.html#query-for-latest-versions-only"><i class="fa fa-check"></i>Query for latest versions only</a></li>
+<li class="chapter" data-level="" data-path="example-solr-queries.html"><a href="example-solr-queries.html#use-not-in-a-query"><i class="fa fa-check"></i>Use NOT in a query</a></li>
+<li class="chapter" data-level="" data-path="example-solr-queries.html"><a href="example-solr-queries.html#query-a-coordinating-node"><i class="fa fa-check"></i>Query a coordinating node</a></li>
+<li class="chapter" data-level="" data-path="example-solr-queries.html"><a href="example-solr-queries.html#query-for-emls-that-document-a-specific-data-pid"><i class="fa fa-check"></i>Query for EMLs that document a specific data pid</a></li>
+<li class="chapter" data-level="" data-path="example-solr-queries.html"><a href="example-solr-queries.html#query-for-files-uploaded-during-a-specific-time"><i class="fa fa-check"></i>Query for files uploaded during a specific time</a></li>
+<li class="chapter" data-level="" data-path="example-solr-queries.html"><a href="example-solr-queries.html#use-facets-1"><i class="fa fa-check"></i>Use facets</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="more-resources.html"><a href="more-resources.html"><i class="fa fa-check"></i>More resources</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="adc-web-submissions.html"><a href="adc-web-submissions.html"><i class="fa fa-check"></i>ADC web submissions</a><ul>
+<li class="chapter" data-level="" data-path="add-physicals-to-submissions.html"><a href="add-physicals-to-submissions.html"><i class="fa fa-check"></i>Add physicals to submissions</a></li>
+<li class="chapter" data-level="" data-path="assess-attributes.html"><a href="assess-attributes.html"><i class="fa fa-check"></i>Assess attributes</a></li>
+<li class="chapter" data-level="" data-path="list-submissions-to-the-arctic-data-center.html"><a href="list-submissions-to-the-arctic-data-center.html"><i class="fa fa-check"></i>List submissions to the Arctic Data Center</a></li>
+<li class="chapter" data-level="" data-path="recover-failed-submissions.html"><a href="recover-failed-submissions.html"><i class="fa fa-check"></i>Recover failed submissions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-portals.html"><a href="data-portals.html"><i class="fa fa-check"></i>Data Portals</a><ul>
+<li class="chapter" data-level="" data-path="data-portals-1.html"><a href="data-portals-1.html"><i class="fa fa-check"></i>Data Portals</a></li>
+<li class="chapter" data-level="" data-path="distributed-biological-observatory-dbo-submissions.html"><a href="distributed-biological-observatory-dbo-submissions.html"><i class="fa fa-check"></i>Distributed Biological Observatory (DBO) submissions</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://nceas.github.io/datateam-training/training/" target="blank">Training</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">NCEAS Data Team Reference Guide</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="example-solr-queries" class="section level2">
+<h2>Example Solr queries</h2>
+<p>For additional examples and explanations, check out the Apache Lucene <a href = 'https://lucene.apache.org/core/2_9_4/queryparsersyntax.html' target='_blank'>Query Parser Syntax</a> page.</p>
+<div id="find-everything" class="section level3">
+<h3>Find everything</h3>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" data-line-number="1">result &lt;-<span class="st"> </span><span class="kw">query</span>(adc, <span class="kw">list</span>(<span class="dt">q=</span><span class="st">&quot;*:*&quot;</span>,</a>
+<a class="sourceLine" id="cb127-2" data-line-number="2">                               <span class="dt">fl=</span><span class="st">&quot;*&quot;</span>,</a>
+<a class="sourceLine" id="cb127-3" data-line-number="3">                               <span class="dt">rows=</span><span class="st">&quot;20&quot;</span>),</a>
+<a class="sourceLine" id="cb127-4" data-line-number="4">                <span class="dt">as =</span> <span class="st">&quot;data.frame&quot;</span>)</a></code></pre></div>
+</div>
+<div id="query-a-wildcard-expression" class="section level3">
+<h3>Query a wildcard expression</h3>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb128-1" data-line-number="1"><span class="co">#find any id that starts with arctic-data.6</span></a>
+<a class="sourceLine" id="cb128-2" data-line-number="2">result &lt;-<span class="st"> </span><span class="kw">query</span>(adc, <span class="kw">list</span>(<span class="dt">q=</span><span class="st">&quot;id:arctic-data.6*&quot;</span>,</a>
+<a class="sourceLine" id="cb128-3" data-line-number="3">                               <span class="dt">rows=</span><span class="st">&quot;5000&quot;</span>),</a>
+<a class="sourceLine" id="cb128-4" data-line-number="4">                <span class="dt">as =</span> <span class="st">&quot;data.frame&quot;</span>)</a></code></pre></div>
+</div>
+<div id="query-multiple-fields" class="section level3">
+<h3>Query multiple fields</h3>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" data-line-number="1">result &lt;-<span class="st"> </span><span class="kw">query</span>(adc, <span class="kw">list</span>(<span class="dt">q=</span><span class="st">&quot;title:soil*+AND+origin:Ludwig&quot;</span>,</a>
+<a class="sourceLine" id="cb129-2" data-line-number="2">                               <span class="dt">rows=</span><span class="st">&quot;5000&quot;</span>),</a>
+<a class="sourceLine" id="cb129-3" data-line-number="3">                <span class="dt">as =</span> <span class="st">&quot;data.frame&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" data-line-number="1">result &lt;-<span class="st"> </span><span class="kw">query</span>(adc, <span class="kw">list</span>(<span class="dt">q=</span><span class="st">&quot;title:soil* OR origin:Ludwig&quot;</span>,</a>
+<a class="sourceLine" id="cb130-2" data-line-number="2">                               <span class="dt">rows=</span><span class="st">&quot;5000&quot;</span>),</a>
+<a class="sourceLine" id="cb130-3" data-line-number="3">                <span class="dt">as =</span> <span class="st">&quot;data.frame&quot;</span>)</a></code></pre></div>
+<div class="note">
+<p>
+You can use either spaces or <code>+</code> to separate query parameters. When typing queries in R, it’s often easier to read if you use spaces. However, when using the browser, you may want to use <code>+</code> to keep the query clean. (The browser will replace spaces with <code>%20</code>.)
+</p>
+</div>
+</div>
+<div id="query-by-formattype" class="section level3">
+<h3>Query by formatType</h3>
+<p>Objects are queryable via their <code>formatType</code> which is one of DATA, METADATA, or RESOURCE.</p>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" data-line-number="1">result &lt;-<span class="st"> </span><span class="kw">query</span>(adc, <span class="kw">list</span>(<span class="dt">q =</span> <span class="st">&#39;formatType:RESOURCE AND submitter:&quot;http://orcid.org/0000-0002-2561-5840&quot;&#39;</span>,</a>
+<a class="sourceLine" id="cb131-2" data-line-number="2">                          <span class="dt">fl =</span> <span class="st">&#39;identifier,submitter,fileName&#39;</span>,</a>
+<a class="sourceLine" id="cb131-3" data-line-number="3">                          <span class="dt">sort =</span> <span class="st">&#39;dateUploaded+desc&#39;</span>,</a>
+<a class="sourceLine" id="cb131-4" data-line-number="4">                          <span class="dt">rows=</span><span class="st">&#39;10&#39;</span>),</a>
+<a class="sourceLine" id="cb131-5" data-line-number="5">                <span class="dt">as =</span> <span class="st">&quot;data.frame&quot;</span>)</a>
+<a class="sourceLine" id="cb131-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb131-7" data-line-number="7">result &lt;-<span class="st"> </span><span class="kw">query</span>(adc, <span class="kw">list</span>(<span class="dt">q =</span> <span class="st">&#39;formatType:METADATA AND title:*Toolik*&#39;</span>,</a>
+<a class="sourceLine" id="cb131-8" data-line-number="8">                          <span class="dt">fl =</span> <span class="st">&#39;identifier,submitter,fileName&#39;</span>,</a>
+<a class="sourceLine" id="cb131-9" data-line-number="9">                          <span class="dt">sort =</span> <span class="st">&#39;dateUploaded+desc&#39;</span>,</a>
+<a class="sourceLine" id="cb131-10" data-line-number="10">                          <span class="dt">rows=</span><span class="st">&#39;10&#39;</span>),</a>
+<a class="sourceLine" id="cb131-11" data-line-number="11">                <span class="dt">as =</span> <span class="st">&quot;data.frame&quot;</span>)</a></code></pre></div>
+</div>
+<div id="query-pids-by-a-specific-submitter" class="section level3">
+<h3>Query pids by a specific submitter</h3>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb132-1" data-line-number="1">result &lt;-<span class="st"> </span><span class="kw">query</span>(adc, <span class="kw">list</span>(<span class="dt">q =</span> <span class="st">&#39;submitter:&quot;http://orcid.org/0000-0003-4703-1974&quot;&#39;</span>,</a>
+<a class="sourceLine" id="cb132-2" data-line-number="2">               <span class="dt">fl =</span> <span class="st">&#39;identifier,submitter,fileName, size&#39;</span>,</a>
+<a class="sourceLine" id="cb132-3" data-line-number="3">               <span class="dt">sort =</span> <span class="st">&#39;dateUploaded+desc&#39;</span>,</a>
+<a class="sourceLine" id="cb132-4" data-line-number="4">               <span class="dt">rows=</span><span class="st">&#39;1000&#39;</span>),</a>
+<a class="sourceLine" id="cb132-5" data-line-number="5">      <span class="dt">as =</span> <span class="st">&quot;data.frame&quot;</span>)</a></code></pre></div>
+</div>
+<div id="query-pids-with-special-characters" class="section level3">
+<h3>Query pids with special characters</h3>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb133-1" data-line-number="1"><span class="co"># Wrap the pid with special characters with escaped backslashes</span></a>
+<a class="sourceLine" id="cb133-2" data-line-number="2">dataone<span class="op">::</span><span class="kw">query</span>(adc, <span class="kw">list</span>(<span class="dt">q =</span> <span class="kw">paste0</span>(<span class="st">&#39;id:&#39;</span>, <span class="st">&#39;</span><span class="ch">\&quot;</span><span class="st">&#39;</span>, <span class="st">&#39;doi:10.18739/A20R9M36V&#39;</span>, <span class="st">&#39;</span><span class="ch">\&quot;</span><span class="st">&#39;</span>),</a>
+<a class="sourceLine" id="cb133-3" data-line-number="3">                         <span class="dt">fl =</span> <span class="st">&#39;dateUploaded AND identifier&#39;</span>,</a>
+<a class="sourceLine" id="cb133-4" data-line-number="4">                         <span class="dt">rows =</span> <span class="dv">5000</span>),</a>
+<a class="sourceLine" id="cb133-5" data-line-number="5">               <span class="dt">as =</span> <span class="st">&quot;data.frame&quot;</span>)</a></code></pre></div>
+</div>
+<div id="query-multiple-conditions-within-one-field" class="section level3">
+<h3>Query multiple conditions within one field</h3>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb134-1" data-line-number="1">result &lt;-<span class="st"> </span><span class="kw">query</span>(adc, <span class="kw">list</span>(<span class="dt">q=</span><span class="st">&quot;title:(soil* AND carbo*)&quot;</span>,</a>
+<a class="sourceLine" id="cb134-2" data-line-number="2">                               <span class="dt">rows=</span><span class="st">&quot;5000&quot;</span>),</a>
+<a class="sourceLine" id="cb134-3" data-line-number="3">                <span class="dt">as =</span> <span class="st">&quot;data.frame&quot;</span>) </a></code></pre></div>
+</div>
+<div id="query-for-latest-versions-only" class="section level3">
+<h3>Query for latest versions only</h3>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb135-1" data-line-number="1">result &lt;-<span class="st"> </span><span class="kw">query</span>(adc, <span class="kw">list</span>(<span class="dt">q =</span> <span class="st">&quot;rightsHolder:*orcid.org/0000-000X-XXXX-XXXX* AND (*:* NOT obsoletedBy:*)&quot;</span>,</a>
+<a class="sourceLine" id="cb135-2" data-line-number="2">                          <span class="dt">fl =</span> <span class="st">&quot;identifier,rightsHolder,formatId&quot;</span>,</a>
+<a class="sourceLine" id="cb135-3" data-line-number="3">                          <span class="dt">start =</span><span class="st">&quot;0&quot;</span>,</a>
+<a class="sourceLine" id="cb135-4" data-line-number="4">                          <span class="dt">rows =</span> <span class="st">&quot;1500&quot;</span>),</a>
+<a class="sourceLine" id="cb135-5" data-line-number="5">                     <span class="dt">as=</span><span class="st">&quot;data.frame&quot;</span>)</a></code></pre></div>
+</div>
+<div id="use-not-in-a-query" class="section level3">
+<h3>Use NOT in a query</h3>
+<p>Just add <code>-</code> before a query parameter!</p>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb136-1" data-line-number="1">result &lt;-<span class="st"> </span><span class="kw">query</span>(adc, <span class="kw">list</span>(<span class="dt">q=</span><span class="st">&quot;title:(soil AND -carbon)&quot;</span>,</a>
+<a class="sourceLine" id="cb136-2" data-line-number="2">                               <span class="dt">rows=</span><span class="st">&quot;5000&quot;</span>),</a>
+<a class="sourceLine" id="cb136-3" data-line-number="3">                <span class="dt">as =</span> <span class="st">&quot;data.frame&quot;</span>)</a></code></pre></div>
+</div>
+<div id="query-a-coordinating-node" class="section level3">
+<h3>Query a coordinating node</h3>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb137-1" data-line-number="1">result &lt;-<span class="st"> </span><span class="kw">query</span>(cn, <span class="kw">list</span>(<span class="dt">q=</span><span class="st">&quot;title:soil* AND origin:Ludwig&quot;</span>,</a>
+<a class="sourceLine" id="cb137-2" data-line-number="2">                              <span class="dt">rows=</span><span class="st">&quot;5000&quot;</span>),</a>
+<a class="sourceLine" id="cb137-3" data-line-number="3">                <span class="dt">as =</span> <span class="st">&quot;data.frame&quot;</span>)</a></code></pre></div>
+</div>
+<div id="query-for-emls-that-document-a-specific-data-pid" class="section level3">
+<h3>Query for EMLs that document a specific data pid</h3>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb138-1" data-line-number="1"><span class="co"># Wrap the pid in escaped quotation marks if it contains special characters </span></a>
+<a class="sourceLine" id="cb138-2" data-line-number="2"><span class="kw">query</span>(adc, <span class="kw">list</span>(<span class="dt">q =</span> <span class="kw">paste0</span>(<span class="st">&#39;documents:&#39;</span>, <span class="st">&#39;</span><span class="ch">\&quot;</span><span class="st">&#39;</span>, <span class="st">&#39;urn:uuid:f551460b-ce36-4dd3-aaa6-3a6c6e338ec9&#39;</span>, <span class="st">&#39;</span><span class="ch">\&quot;</span><span class="st">&#39;</span>),</a>
+<a class="sourceLine" id="cb138-3" data-line-number="3">                <span class="dt">fl =</span> <span class="st">&quot;identifier&quot;</span>,</a>
+<a class="sourceLine" id="cb138-4" data-line-number="4">                <span class="dt">rows=</span><span class="st">&quot;20&quot;</span>),</a>
+<a class="sourceLine" id="cb138-5" data-line-number="5">      <span class="dt">as =</span> <span class="st">&quot;data.frame&quot;</span>)</a>
+<a class="sourceLine" id="cb138-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb138-7" data-line-number="7"><span class="co"># Alternatively we can use a wildcard expression in place of &quot;urn:uuid:&quot;</span></a>
+<a class="sourceLine" id="cb138-8" data-line-number="8"><span class="co"># This way we don&#39;t need to escape the colon special characters </span></a>
+<a class="sourceLine" id="cb138-9" data-line-number="9"><span class="kw">query</span>(adc, <span class="kw">list</span>(<span class="dt">q =</span> <span class="kw">paste0</span>(<span class="st">&quot;documents:*f551460b-ce36-4dd3-aaa6-3a6c6e338ec9&quot;</span>),</a>
+<a class="sourceLine" id="cb138-10" data-line-number="10">                <span class="dt">fl =</span> <span class="st">&quot;identifier&quot;</span>,</a>
+<a class="sourceLine" id="cb138-11" data-line-number="11">                <span class="dt">rows=</span><span class="st">&quot;20&quot;</span>),</a>
+<a class="sourceLine" id="cb138-12" data-line-number="12">      <span class="dt">as =</span> <span class="st">&quot;data.frame&quot;</span>)</a></code></pre></div>
+</div>
+<div id="query-for-files-uploaded-during-a-specific-time" class="section level3">
+<h3>Query for files uploaded during a specific time</h3>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" data-line-number="1"><span class="kw">query</span>(adc, <span class="kw">list</span>(<span class="dt">q=</span><span class="st">&quot;dateUploaded:[2020-05-06T00:00:00Z TO NOW]&quot;</span>,</a>
+<a class="sourceLine" id="cb139-2" data-line-number="2">                <span class="dt">fl=</span><span class="st">&quot;title,identifier,resourceMap,dateUploaded,dateModified&quot;</span>,</a>
+<a class="sourceLine" id="cb139-3" data-line-number="3">                <span class="dt">sort =</span> <span class="st">&quot;dateUploaded+desc&quot;</span>,</a>
+<a class="sourceLine" id="cb139-4" data-line-number="4">                <span class="dt">rows=</span><span class="st">&quot;200&quot;</span>), </a>
+<a class="sourceLine" id="cb139-5" data-line-number="5">      <span class="dt">as =</span> <span class="st">&quot;data.frame&quot;</span>)</a>
+<a class="sourceLine" id="cb139-6" data-line-number="6">##                                        identifier        dateUploaded</a>
+<a class="sourceLine" id="cb139-7" data-line-number="7">## 1   urn:uuid:d8523457-ebd7-4bce-9ff9-d30e63766347 2020-07-11 15:02:52</a>
+<a class="sourceLine" id="cb139-8" data-line-number="8">## 2   urn:uuid:a787f5a7-da59-4457-8b08-a158f9ad0a18 2020-07-11 14:59:18</a>
+<a class="sourceLine" id="cb139-9" data-line-number="9">## 3   urn:uuid:bc5d8d3f-b907-4bca-af5c-95ff6358ab3f 2020-07-11 14:55:36</a>
+<a class="sourceLine" id="cb139-10" data-line-number="10">## 4   urn:uuid:ebf4fa25-d5a7-4864-81e1-10c351d5eec1 2020-07-11 14:52:03</a>
+<a class="sourceLine" id="cb139-11" data-line-number="11">## 5   urn:uuid:68393c7b-cbe8-45ba-8c04-70d59e1ea68d 2020-07-11 14:48:22</a>
+<a class="sourceLine" id="cb139-12" data-line-number="12">## 6   urn:uuid:c368ffa1-dedf-4930-9e12-01cf4fdee531 2020-07-11 14:44:32</a>
+<a class="sourceLine" id="cb139-13" data-line-number="13">## 7   urn:uuid:995ea004-9b3c-454b-9c6c-83da2b5887bb 2020-07-11 14:39:43</a>
+<a class="sourceLine" id="cb139-14" data-line-number="14">## 8   urn:uuid:a491db26-074c-4d9e-a56c-62764ed620d7 2020-07-11 14:35:39</a>
+<a class="sourceLine" id="cb139-15" data-line-number="15">## 9   urn:uuid:0062b516-6af5-4d79-9fd4-5db01005eb6a 2020-07-11 14:31:47</a>
+<a class="sourceLine" id="cb139-16" data-line-number="16">## 10  urn:uuid:67583d92-0685-40f1-983b-144944ea16cd 2020-07-11 14:28:17</a>
+<a class="sourceLine" id="cb139-17" data-line-number="17">## 11  urn:uuid:13174880-7f38-41d4-9c1e-02f488d7b434 2020-07-11 14:24:39</a>
+<a class="sourceLine" id="cb139-18" data-line-number="18">## 12  urn:uuid:50c4091f-4e2a-4e9d-b68a-73ba83aa938f 2020-07-11 14:19:24</a>
+<a class="sourceLine" id="cb139-19" data-line-number="19">## 13  urn:uuid:aa5c427b-2558-4999-8d32-64ae46570e13 2020-07-11 14:15:02</a>
+<a class="sourceLine" id="cb139-20" data-line-number="20">## 14  urn:uuid:2ecb3009-c3a6-4371-a849-e3475827c6eb 2020-07-11 14:10:05</a>
+<a class="sourceLine" id="cb139-21" data-line-number="21">## 15  urn:uuid:f92c1c9a-1c8d-43f4-b5a5-6175d917de2a 2020-07-11 14:06:13</a>
+<a class="sourceLine" id="cb139-22" data-line-number="22">## 16  urn:uuid:ead27762-5818-42d8-b01c-2007ed6d10a3 2020-07-11 14:01:28</a>
+<a class="sourceLine" id="cb139-23" data-line-number="23">## 17  urn:uuid:2140ade0-e75b-4b1c-b683-e67ff36b0426 2020-07-11 13:56:34</a>
+<a class="sourceLine" id="cb139-24" data-line-number="24">## 18  urn:uuid:478979cd-ccbd-441b-aa81-84bef0f477a2 2020-07-11 13:52:05</a>
+<a class="sourceLine" id="cb139-25" data-line-number="25">## 19  urn:uuid:e58e86c1-88b0-40b9-b31a-08e783e888e1 2020-07-11 13:48:30</a>
+<a class="sourceLine" id="cb139-26" data-line-number="26">## 20  urn:uuid:66e68d53-f61c-4b3d-886b-1a70d3225828 2020-07-11 13:44:38</a>
+<a class="sourceLine" id="cb139-27" data-line-number="27">## 21  urn:uuid:2709070a-2948-4bec-aed5-110884f022ce 2020-07-11 13:40:29</a>
+<a class="sourceLine" id="cb139-28" data-line-number="28">## 22  urn:uuid:fb96b687-adf0-41e4-a3ce-c90d27d11184 2020-07-11 13:35:53</a>
+<a class="sourceLine" id="cb139-29" data-line-number="29">## 23  urn:uuid:c62829bb-cc11-48b9-8c61-b0347af9527e 2020-07-11 13:31:56</a>
+<a class="sourceLine" id="cb139-30" data-line-number="30">## 24  urn:uuid:5ff98192-a2f7-4ded-92b2-aee46e3d06d2 2020-07-11 13:27:31</a>
+<a class="sourceLine" id="cb139-31" data-line-number="31">## 25  urn:uuid:1c5608a9-2169-47b0-b355-f65484247675 2020-07-11 13:24:00</a>
+<a class="sourceLine" id="cb139-32" data-line-number="32">## 26  urn:uuid:f836c7d4-2ba0-4d08-9a46-08303207ebe9 2020-07-11 13:20:16</a>
+<a class="sourceLine" id="cb139-33" data-line-number="33">## 27  urn:uuid:87148050-6b89-4b15-99f7-5fc7937a09f8 2020-07-11 13:16:45</a>
+<a class="sourceLine" id="cb139-34" data-line-number="34">## 28  urn:uuid:08639562-4563-4fc1-8240-c0f6a4541ff1 2020-07-11 13:13:23</a>
+<a class="sourceLine" id="cb139-35" data-line-number="35">## 29  urn:uuid:26b52f38-ac41-4d87-b81e-5d21993be9c8 2020-07-11 13:10:02</a>
+<a class="sourceLine" id="cb139-36" data-line-number="36">## 30  urn:uuid:26a32df5-1813-4cc0-a3cd-67d7af70ff40 2020-07-11 13:06:16</a>
+<a class="sourceLine" id="cb139-37" data-line-number="37">## 31  urn:uuid:0852172a-50c9-499c-a91f-c40f0006706f 2020-07-11 13:02:36</a>
+<a class="sourceLine" id="cb139-38" data-line-number="38">## 32  urn:uuid:88104aa1-97d2-44ce-87e1-7259d788fbf1 2020-07-11 12:58:51</a>
+<a class="sourceLine" id="cb139-39" data-line-number="39">## 33  urn:uuid:295182b9-621a-4265-81fe-6e2e64402320 2020-07-11 12:53:57</a>
+<a class="sourceLine" id="cb139-40" data-line-number="40">## 34  urn:uuid:37b0151a-5238-4206-ad28-60175e35d6bd 2020-07-11 12:48:57</a>
+<a class="sourceLine" id="cb139-41" data-line-number="41">## 35  urn:uuid:00039a1c-1f13-48be-89fc-bb5cba829b1d 2020-07-11 12:45:05</a>
+<a class="sourceLine" id="cb139-42" data-line-number="42">## 36  urn:uuid:05097bdc-2f85-43e8-8c0a-a04f8a21a3d2 2020-07-11 12:41:19</a>
+<a class="sourceLine" id="cb139-43" data-line-number="43">## 37  urn:uuid:ed256f62-9a4b-45aa-8bb8-fed990b08072 2020-07-11 12:37:15</a>
+<a class="sourceLine" id="cb139-44" data-line-number="44">## 38  urn:uuid:4013350c-6262-4446-a722-46a502a86d65 2020-07-11 12:33:06</a>
+<a class="sourceLine" id="cb139-45" data-line-number="45">## 39  urn:uuid:d0284fc2-561f-4d1e-9d79-2493ae316aac 2020-07-11 12:28:22</a>
+<a class="sourceLine" id="cb139-46" data-line-number="46">## 40  urn:uuid:de26ab2e-d416-41c0-9a9c-c3a2c2ab1b78 2020-07-11 12:24:45</a>
+<a class="sourceLine" id="cb139-47" data-line-number="47">## 41  urn:uuid:d601698c-28ee-4c36-8946-13c213a76cbd 2020-07-11 12:21:11</a>
+<a class="sourceLine" id="cb139-48" data-line-number="48">## 42  urn:uuid:fb50f209-11fc-4c8f-933f-3c199b87b35e 2020-07-11 12:17:17</a>
+<a class="sourceLine" id="cb139-49" data-line-number="49">## 43  urn:uuid:98fd750f-48c4-4a5a-944f-5f09d3571289 2020-07-11 12:13:55</a>
+<a class="sourceLine" id="cb139-50" data-line-number="50">## 44  urn:uuid:ca1b0e2d-ebc6-40a0-a50d-9b06523f1364 2020-07-11 12:10:26</a>
+<a class="sourceLine" id="cb139-51" data-line-number="51">## 45  urn:uuid:20c4f52f-7859-4708-a21d-4bfc58c993cf 2020-07-11 12:06:49</a>
+<a class="sourceLine" id="cb139-52" data-line-number="52">## 46  urn:uuid:0c600f32-209f-4bfe-9bb4-52b3cc9452c3 2020-07-11 12:02:42</a>
+<a class="sourceLine" id="cb139-53" data-line-number="53">## 47  urn:uuid:7c89b648-07b1-4af6-8dc1-3f0d814214db 2020-07-11 11:58:20</a>
+<a class="sourceLine" id="cb139-54" data-line-number="54">## 48  urn:uuid:19cd5f5a-685a-414c-9a09-9aae4b1b3a6d 2020-07-11 11:54:01</a>
+<a class="sourceLine" id="cb139-55" data-line-number="55">## 49  urn:uuid:fc9d687b-b08c-4d55-b252-31e21b8d5608 2020-07-11 11:49:50</a>
+<a class="sourceLine" id="cb139-56" data-line-number="56">## 50  urn:uuid:9acc05da-1b35-4a5a-a278-75dd66e6ece7 2020-07-11 11:45:55</a>
+<a class="sourceLine" id="cb139-57" data-line-number="57">## 51  urn:uuid:4dfb6bdb-9760-4e61-8d26-90e39464a7e3 2020-07-11 11:42:26</a>
+<a class="sourceLine" id="cb139-58" data-line-number="58">## 52  urn:uuid:055cb325-d95d-4107-92f4-3e987cbded63 2020-07-11 11:39:03</a>
+<a class="sourceLine" id="cb139-59" data-line-number="59">## 53  urn:uuid:db19d77c-ab2d-4e2e-8853-3d43d613dd7f 2020-07-11 11:35:07</a>
+<a class="sourceLine" id="cb139-60" data-line-number="60">## 54  urn:uuid:1708ebe4-3be2-4adc-8c30-11e3da8aac72 2020-07-11 11:31:01</a>
+<a class="sourceLine" id="cb139-61" data-line-number="61">## 55  urn:uuid:2706d77b-e77c-439f-bae3-5b0e45d61592 2020-07-11 11:27:11</a>
+<a class="sourceLine" id="cb139-62" data-line-number="62">## 56  urn:uuid:c97887a2-eab3-4530-88bf-ae389b476a5c 2020-07-11 11:23:50</a>
+<a class="sourceLine" id="cb139-63" data-line-number="63">## 57  urn:uuid:2533908e-9291-4f8b-a8b5-65fe916e469c 2020-07-11 11:19:39</a>
+<a class="sourceLine" id="cb139-64" data-line-number="64">## 58  urn:uuid:b898f9c0-e622-4638-9169-d65d2432e191 2020-07-11 11:16:17</a>
+<a class="sourceLine" id="cb139-65" data-line-number="65">## 59  urn:uuid:16dc8c60-017c-45ea-8a2b-fd651f32b38d 2020-07-11 11:12:21</a>
+<a class="sourceLine" id="cb139-66" data-line-number="66">## 60  urn:uuid:9cc4086c-eb30-4396-9b43-f7bfd79aa405 2020-07-11 11:08:20</a>
+<a class="sourceLine" id="cb139-67" data-line-number="67">## 61  urn:uuid:e546355c-4ba7-4285-8e57-682d9d1aad01 2020-07-11 11:03:50</a>
+<a class="sourceLine" id="cb139-68" data-line-number="68">## 62  urn:uuid:36268058-f032-46c1-a97f-1b3c2ca294d2 2020-07-11 10:59:04</a>
+<a class="sourceLine" id="cb139-69" data-line-number="69">## 63  urn:uuid:2433003a-6f7d-440a-a554-24bbea790361 2020-07-11 10:55:13</a>
+<a class="sourceLine" id="cb139-70" data-line-number="70">## 64  urn:uuid:9ae59041-6b94-4c2c-b0be-96b3a4e798b4 2020-07-11 10:51:36</a>
+<a class="sourceLine" id="cb139-71" data-line-number="71">## 65  urn:uuid:32b1225a-d8e7-4cf8-968a-32d732c27be0 2020-07-11 10:47:59</a>
+<a class="sourceLine" id="cb139-72" data-line-number="72">## 66  urn:uuid:41729e4b-c9c4-44b9-8a18-38a46fd9b981 2020-07-11 10:43:15</a>
+<a class="sourceLine" id="cb139-73" data-line-number="73">## 67  urn:uuid:e699dc66-ba61-420c-bf1a-e2cf8cbd2aca 2020-07-11 10:38:51</a>
+<a class="sourceLine" id="cb139-74" data-line-number="74">## 68  urn:uuid:c4267af3-9d62-41ab-a331-7f2598f04980 2020-07-11 10:33:50</a>
+<a class="sourceLine" id="cb139-75" data-line-number="75">## 69  urn:uuid:ec1b1309-f8a2-4846-a230-a84d8cd01008 2020-07-11 10:29:09</a>
+<a class="sourceLine" id="cb139-76" data-line-number="76">## 70  urn:uuid:03b4ffab-55a1-4aea-b477-c27f124fc09c 2020-07-11 10:24:51</a>
+<a class="sourceLine" id="cb139-77" data-line-number="77">## 71  urn:uuid:f0ee7bbd-9cfa-48e7-b2dc-7725aa6b4beb 2020-07-11 10:21:12</a>
+<a class="sourceLine" id="cb139-78" data-line-number="78">## 72  urn:uuid:4d86adde-c7cd-4494-b2b2-aa6a5dc91f36 2020-07-11 10:16:57</a>
+<a class="sourceLine" id="cb139-79" data-line-number="79">## 73  urn:uuid:a50d4377-e346-4b30-a412-f04d484fac7d 2020-07-11 10:12:45</a>
+<a class="sourceLine" id="cb139-80" data-line-number="80">## 74  urn:uuid:2ba35775-ae50-494d-8c81-24089f317df5 2020-07-11 10:08:21</a>
+<a class="sourceLine" id="cb139-81" data-line-number="81">## 75  urn:uuid:3c90155b-684a-4ead-8758-7d811907c31e 2020-07-11 10:04:45</a>
+<a class="sourceLine" id="cb139-82" data-line-number="82">## 76  urn:uuid:8b41f84e-f691-4376-8d03-18a536985294 2020-07-11 10:00:02</a>
+<a class="sourceLine" id="cb139-83" data-line-number="83">## 77  urn:uuid:9ced9094-e1bc-4298-bbbc-ca27a2b5739b 2020-07-11 09:55:06</a>
+<a class="sourceLine" id="cb139-84" data-line-number="84">## 78  urn:uuid:5f16f74e-9681-4c05-93fd-bcf55ec0fb46 2020-07-11 09:51:38</a>
+<a class="sourceLine" id="cb139-85" data-line-number="85">## 79  urn:uuid:c5f7db8b-8673-47cc-ab4f-b06182882215 2020-07-11 09:46:55</a>
+<a class="sourceLine" id="cb139-86" data-line-number="86">## 80  urn:uuid:c8cffa06-96fb-4049-9cb3-466427f5beeb 2020-07-11 09:43:08</a>
+<a class="sourceLine" id="cb139-87" data-line-number="87">## 81  urn:uuid:aaca4fc1-4a8c-47ef-a9b0-f4a3d26125cf 2020-07-11 09:39:10</a>
+<a class="sourceLine" id="cb139-88" data-line-number="88">## 82  urn:uuid:46f20b17-f049-4d29-b705-ac05793ee220 2020-07-11 09:35:16</a>
+<a class="sourceLine" id="cb139-89" data-line-number="89">## 83  urn:uuid:2f23b2fe-7b33-420b-bff2-bc79bf75454f 2020-07-11 09:31:41</a>
+<a class="sourceLine" id="cb139-90" data-line-number="90">## 84  urn:uuid:8c845206-21e0-46fa-9c80-94b82cd1e2f1 2020-07-11 09:27:56</a>
+<a class="sourceLine" id="cb139-91" data-line-number="91">## 85  urn:uuid:8207794c-878f-433f-8722-e63c75d3d047 2020-07-11 09:23:51</a>
+<a class="sourceLine" id="cb139-92" data-line-number="92">## 86  urn:uuid:6bd352d3-b5e6-45dc-b1e5-d98441cdc765 2020-07-11 09:20:24</a>
+<a class="sourceLine" id="cb139-93" data-line-number="93">## 87  urn:uuid:7d7fa447-de4b-4db1-a49c-52a658b8f2ec 2020-07-11 09:16:40</a>
+<a class="sourceLine" id="cb139-94" data-line-number="94">## 88  urn:uuid:b34f8db6-ce76-435d-b021-06ae40a69fb4 2020-07-11 09:11:42</a>
+<a class="sourceLine" id="cb139-95" data-line-number="95">## 89  urn:uuid:5e90ab5a-c0dd-444e-8b7d-ef3ae0cd203e 2020-07-11 09:07:40</a>
+<a class="sourceLine" id="cb139-96" data-line-number="96">## 90  urn:uuid:9d6f9158-619d-481f-ae49-150bdeebadcd 2020-07-11 09:04:06</a>
+<a class="sourceLine" id="cb139-97" data-line-number="97">## 91  urn:uuid:b75f7561-e204-49ea-b390-240f8075b393 2020-07-11 09:00:50</a>
+<a class="sourceLine" id="cb139-98" data-line-number="98">## 92  urn:uuid:f6b3dad9-4820-43f8-b546-5a96c34775df 2020-07-11 08:57:25</a>
+<a class="sourceLine" id="cb139-99" data-line-number="99">## 93  urn:uuid:49cfb73c-373e-4c54-ae13-14657d182ac4 2020-07-11 08:53:54</a>
+<a class="sourceLine" id="cb139-100" data-line-number="100">## 94  urn:uuid:8fbf896c-1549-4662-b9a2-07fc96467dfc 2020-07-11 08:50:20</a>
+<a class="sourceLine" id="cb139-101" data-line-number="101">## 95  urn:uuid:f0f4199e-d62d-43bf-8ef2-e4d0439ac252 2020-07-11 08:42:27</a>
+<a class="sourceLine" id="cb139-102" data-line-number="102">## 96  urn:uuid:a8e2ad9b-7f0f-4d85-881e-de5db466e06a 2020-07-11 08:26:49</a>
+<a class="sourceLine" id="cb139-103" data-line-number="103">## 97  urn:uuid:764eb141-7248-4a1a-8c46-f877f707d053 2020-07-11 08:13:02</a>
+<a class="sourceLine" id="cb139-104" data-line-number="104">## 98  urn:uuid:41bd6d96-09e4-446d-93fd-e2f992e27ce1 2020-07-11 08:09:47</a>
+<a class="sourceLine" id="cb139-105" data-line-number="105">## 99  urn:uuid:aa300f4f-b94e-48ff-8c6f-2745d6581c9f 2020-07-11 08:06:20</a>
+<a class="sourceLine" id="cb139-106" data-line-number="106">## 100 urn:uuid:08c99e89-fcef-4ca1-ae15-20c65170d4a1 2020-07-11 08:02:38</a>
+<a class="sourceLine" id="cb139-107" data-line-number="107">## 101 urn:uuid:16d03571-cdab-445a-b47c-afe130e1fc94 2020-07-11 07:58:48</a>
+<a class="sourceLine" id="cb139-108" data-line-number="108">## 102 urn:uuid:55482c92-93b1-4693-8dd6-efed59a860a3 2020-07-11 07:54:20</a>
+<a class="sourceLine" id="cb139-109" data-line-number="109">## 103 urn:uuid:aa6cbab2-1ea0-41a2-a9b3-14cc6e41cd0d 2020-07-11 07:50:09</a>
+<a class="sourceLine" id="cb139-110" data-line-number="110">## 104 urn:uuid:288d2619-7366-4f14-891e-222b3deb03e0 2020-07-11 07:46:42</a>
+<a class="sourceLine" id="cb139-111" data-line-number="111">## 105 urn:uuid:534ae27b-5396-4b4d-b101-b1b9f299e718 2020-07-11 07:42:27</a>
+<a class="sourceLine" id="cb139-112" data-line-number="112">## 106 urn:uuid:5e630741-0efe-4e31-bdb3-3701b6105af9 2020-07-11 07:38:53</a>
+<a class="sourceLine" id="cb139-113" data-line-number="113">## 107 urn:uuid:4b898e47-ad14-4a92-a69c-3551257761d5 2020-07-11 07:33:16</a>
+<a class="sourceLine" id="cb139-114" data-line-number="114">## 108 urn:uuid:08ce626d-aa69-4060-89c9-3e0389dd6077 2020-07-11 07:29:56</a>
+<a class="sourceLine" id="cb139-115" data-line-number="115">## 109 urn:uuid:0d198518-3070-43d7-ac78-7ebbb7356f40 2020-07-11 07:26:37</a>
+<a class="sourceLine" id="cb139-116" data-line-number="116">## 110 urn:uuid:3379d1d5-5d36-4428-b62e-2eb8f0d95ca8 2020-07-11 07:23:02</a>
+<a class="sourceLine" id="cb139-117" data-line-number="117">## 111 urn:uuid:c9c0587f-66a3-4b96-9957-6d08d3f461f7 2020-07-11 07:19:42</a>
+<a class="sourceLine" id="cb139-118" data-line-number="118">## 112 urn:uuid:30e64152-e9f9-4d6e-9a06-9c09d486b1f7 2020-07-11 07:16:01</a>
+<a class="sourceLine" id="cb139-119" data-line-number="119">## 113 urn:uuid:56246f60-f436-4f0b-805e-fe10cda6ad68 2020-07-11 07:12:37</a>
+<a class="sourceLine" id="cb139-120" data-line-number="120">## 114 urn:uuid:68314abf-31b8-4071-ba82-4a6298bda655 2020-07-11 07:09:13</a>
+<a class="sourceLine" id="cb139-121" data-line-number="121">## 115 urn:uuid:5c2cbfb5-bcf0-451c-b192-bedfe7df114d 2020-07-11 07:06:03</a>
+<a class="sourceLine" id="cb139-122" data-line-number="122">## 116 urn:uuid:bfc60e2c-b704-486b-8348-c30924aed170 2020-07-11 07:02:46</a>
+<a class="sourceLine" id="cb139-123" data-line-number="123">## 117 urn:uuid:37db7eee-44d3-4ffa-8bf8-608355519ae5 2020-07-11 06:59:26</a>
+<a class="sourceLine" id="cb139-124" data-line-number="124">## 118 urn:uuid:229606e3-8b22-48cf-8b07-e029871d7664 2020-07-11 06:55:40</a>
+<a class="sourceLine" id="cb139-125" data-line-number="125">## 119 urn:uuid:d84d8d42-0024-49e2-9370-7ca0411dbfba 2020-07-11 06:51:42</a>
+<a class="sourceLine" id="cb139-126" data-line-number="126">## 120 urn:uuid:757ca4f4-cfc6-4429-b381-184886b34a4f 2020-07-11 06:48:02</a>
+<a class="sourceLine" id="cb139-127" data-line-number="127">## 121 urn:uuid:88fc52f8-eb13-47d2-99aa-ed34ef74e55f 2020-07-11 06:42:16</a>
+<a class="sourceLine" id="cb139-128" data-line-number="128">## 122 urn:uuid:a0b8ac5a-4c12-4fdb-b645-9539de3aab00 2020-07-11 06:36:54</a>
+<a class="sourceLine" id="cb139-129" data-line-number="129">## 123 urn:uuid:04234367-b280-4d07-a10a-e0a567a006b5 2020-07-11 06:30:22</a>
+<a class="sourceLine" id="cb139-130" data-line-number="130">## 124 urn:uuid:b2f3951f-8fa2-4dc0-9809-33180c1dcde4 2020-07-11 06:25:28</a>
+<a class="sourceLine" id="cb139-131" data-line-number="131">## 125 urn:uuid:562e91e8-2cc8-46e2-9e51-1669892436c4 2020-07-11 06:19:50</a>
+<a class="sourceLine" id="cb139-132" data-line-number="132">## 126 urn:uuid:49583e17-9849-415d-9302-846c448deb7d 2020-07-11 06:15:23</a>
+<a class="sourceLine" id="cb139-133" data-line-number="133">## 127 urn:uuid:d238c843-b1b6-4fe0-ba84-edb4de31794b 2020-07-11 06:10:00</a>
+<a class="sourceLine" id="cb139-134" data-line-number="134">## 128 urn:uuid:5dc2d2de-09c5-416c-a216-414cfb8610a4 2020-07-11 06:05:21</a>
+<a class="sourceLine" id="cb139-135" data-line-number="135">## 129 urn:uuid:00360b07-73c3-4da1-9e9c-023feee80c77 2020-07-11 06:00:16</a>
+<a class="sourceLine" id="cb139-136" data-line-number="136">## 130 urn:uuid:6c8339d6-4477-4eb7-85c8-9a7f56a63940 2020-07-11 05:55:26</a>
+<a class="sourceLine" id="cb139-137" data-line-number="137">## 131 urn:uuid:3013adbd-a736-474b-a641-b625ee793ee5 2020-07-11 05:50:20</a>
+<a class="sourceLine" id="cb139-138" data-line-number="138">## 132 urn:uuid:b1d36ec2-8edb-4e37-a515-f939cf4d3a91 2020-07-11 05:45:59</a>
+<a class="sourceLine" id="cb139-139" data-line-number="139">## 133 urn:uuid:add99a9c-7804-43e7-9f31-375047c55b9c 2020-07-11 05:41:47</a>
+<a class="sourceLine" id="cb139-140" data-line-number="140">## 134 urn:uuid:840e6dbc-2510-4f04-963d-65cd90f6ccea 2020-07-11 05:35:59</a>
+<a class="sourceLine" id="cb139-141" data-line-number="141">## 135 urn:uuid:b0edc7b7-2ad6-44d8-8852-e3cb9c70b393 2020-07-11 05:30:13</a>
+<a class="sourceLine" id="cb139-142" data-line-number="142">## 136 urn:uuid:e856b148-8e5f-4ca7-a831-3d08f9e7a78f 2020-07-11 05:26:22</a>
+<a class="sourceLine" id="cb139-143" data-line-number="143">## 137 urn:uuid:139503e2-f569-4351-bef6-2b3756412c31 2020-07-11 05:22:12</a>
+<a class="sourceLine" id="cb139-144" data-line-number="144">## 138 urn:uuid:5b5fa746-656a-415e-a4a7-b4505d640d43 2020-07-11 05:17:54</a>
+<a class="sourceLine" id="cb139-145" data-line-number="145">## 139 urn:uuid:b3f4e88d-d7ea-4a0e-93ad-cac23cebc511 2020-07-11 05:13:28</a>
+<a class="sourceLine" id="cb139-146" data-line-number="146">## 140 urn:uuid:8ffd34bf-da67-4cc9-9054-30283927a100 2020-07-11 05:09:32</a>
+<a class="sourceLine" id="cb139-147" data-line-number="147">## 141 urn:uuid:663ce2d0-89f4-414a-b110-0f050e2dff74 2020-07-11 05:05:32</a>
+<a class="sourceLine" id="cb139-148" data-line-number="148">## 142 urn:uuid:3087c187-b27d-41a6-bc8c-98bd6d4c8c8b 2020-07-11 05:01:43</a>
+<a class="sourceLine" id="cb139-149" data-line-number="149">## 143 urn:uuid:55b23acd-68fc-45fb-82a2-5b85106f9420 2020-07-11 04:57:49</a>
+<a class="sourceLine" id="cb139-150" data-line-number="150">## 144 urn:uuid:e419bd6f-aa7e-4e47-af3e-ac0fca17e526 2020-07-11 04:52:35</a>
+<a class="sourceLine" id="cb139-151" data-line-number="151">## 145 urn:uuid:5a2bfaed-c2e0-43f1-9f14-bd17ca501e82 2020-07-11 04:47:56</a>
+<a class="sourceLine" id="cb139-152" data-line-number="152">## 146 urn:uuid:f51c1374-420a-4c26-92e3-87763949d145 2020-07-11 04:41:28</a>
+<a class="sourceLine" id="cb139-153" data-line-number="153">## 147 urn:uuid:d60d9e67-63f3-4f86-b6bd-40fb251e681b 2020-07-11 04:37:12</a>
+<a class="sourceLine" id="cb139-154" data-line-number="154">## 148 urn:uuid:eef9535a-8670-4e0e-a7ac-e2fe09b470ba 2020-07-11 04:29:48</a>
+<a class="sourceLine" id="cb139-155" data-line-number="155">## 149 urn:uuid:c67ed2b8-5e26-4182-ac25-fb8a043acada 2020-07-11 04:24:22</a>
+<a class="sourceLine" id="cb139-156" data-line-number="156">## 150 urn:uuid:7084dc5d-0a2b-4c4b-bf64-559bb82c2e64 2020-07-11 04:20:35</a>
+<a class="sourceLine" id="cb139-157" data-line-number="157">## 151 urn:uuid:4b2dafe3-1dde-445f-a8de-0773156b5ef2 2020-07-11 04:15:05</a>
+<a class="sourceLine" id="cb139-158" data-line-number="158">## 152 urn:uuid:1965562b-18cf-47b8-a46d-6ca83191169f 2020-07-11 04:10:02</a>
+<a class="sourceLine" id="cb139-159" data-line-number="159">## 153 urn:uuid:1c4e3dac-3629-435e-81e0-1d2ef60a58b0 2020-07-11 04:05:28</a>
+<a class="sourceLine" id="cb139-160" data-line-number="160">## 154 urn:uuid:02fcce35-becf-4300-8a4f-10acef6a5576 2020-07-11 04:01:04</a>
+<a class="sourceLine" id="cb139-161" data-line-number="161">## 155 urn:uuid:77aa0f3d-81a9-4239-8a60-bdcada2a8163 2020-07-11 03:55:49</a>
+<a class="sourceLine" id="cb139-162" data-line-number="162">## 156 urn:uuid:186cd18c-b9e7-4752-942c-45d0e817f0b1 2020-07-11 03:50:18</a>
+<a class="sourceLine" id="cb139-163" data-line-number="163">## 157 urn:uuid:90c287c0-2e09-4915-8d86-e6d913ee6024 2020-07-11 03:45:33</a>
+<a class="sourceLine" id="cb139-164" data-line-number="164">## 158 urn:uuid:b010da42-b62d-4cd0-aedc-bd224779c614 2020-07-11 03:40:21</a>
+<a class="sourceLine" id="cb139-165" data-line-number="165">## 159 urn:uuid:87feb134-cbbb-4190-8f0d-87611a20341b 2020-07-11 03:32:04</a>
+<a class="sourceLine" id="cb139-166" data-line-number="166">## 160 urn:uuid:d9ba0f2e-324b-4486-9b39-a149df94f32f 2020-07-11 03:27:58</a>
+<a class="sourceLine" id="cb139-167" data-line-number="167">## 161 urn:uuid:e43acb1b-3571-4e61-9293-d2fde73910f1 2020-07-11 03:24:16</a>
+<a class="sourceLine" id="cb139-168" data-line-number="168">## 162 urn:uuid:93350670-d044-4e57-97a7-cd8ee5dbcf67 2020-07-11 03:20:26</a>
+<a class="sourceLine" id="cb139-169" data-line-number="169">## 163 urn:uuid:c4064e3a-49e3-469d-ad3c-dddca00f11dc 2020-07-11 03:17:05</a>
+<a class="sourceLine" id="cb139-170" data-line-number="170">## 164 urn:uuid:ffe085e7-614e-4126-95b6-2fd91b16bc47 2020-07-11 03:13:28</a>
+<a class="sourceLine" id="cb139-171" data-line-number="171">## 165 urn:uuid:27ee13d5-7549-464e-8f25-54b52fe452bf 2020-07-11 03:09:35</a>
+<a class="sourceLine" id="cb139-172" data-line-number="172">## 166 urn:uuid:4ca76f6f-1846-41a8-8738-a4ec084bb20d 2020-07-11 03:05:27</a>
+<a class="sourceLine" id="cb139-173" data-line-number="173">## 167 urn:uuid:6629a8ed-dc69-4b74-b50f-97bc813c5ecc 2020-07-11 03:01:27</a>
+<a class="sourceLine" id="cb139-174" data-line-number="174">## 168 urn:uuid:87551d2c-e456-47fd-8b79-c4986c2b063f 2020-07-11 02:56:46</a>
+<a class="sourceLine" id="cb139-175" data-line-number="175">## 169 urn:uuid:a7c252e3-71af-45a2-87fc-ecd155f3a610 2020-07-11 02:51:05</a>
+<a class="sourceLine" id="cb139-176" data-line-number="176">## 170 urn:uuid:e0c03812-8e76-4b05-b9e7-5f3d81ba1fb6 2020-07-11 02:46:53</a>
+<a class="sourceLine" id="cb139-177" data-line-number="177">## 171 urn:uuid:1c1df08e-d173-41d3-9e84-3050f7a1e6cc 2020-07-11 02:42:15</a>
+<a class="sourceLine" id="cb139-178" data-line-number="178">## 172 urn:uuid:103ea7b3-2fe6-4a10-b0be-8f5560ea46ba 2020-07-11 02:33:33</a>
+<a class="sourceLine" id="cb139-179" data-line-number="179">## 173 urn:uuid:dcf003f2-d36a-420c-a236-477492bc300a 2020-07-11 02:29:08</a>
+<a class="sourceLine" id="cb139-180" data-line-number="180">## 174 urn:uuid:7529cab3-d21d-4c81-921e-d327653fc946 2020-07-11 02:24:32</a>
+<a class="sourceLine" id="cb139-181" data-line-number="181">## 175 urn:uuid:9721e771-f2bf-4819-a673-ccab8094b052 2020-07-11 02:20:42</a>
+<a class="sourceLine" id="cb139-182" data-line-number="182">## 176 urn:uuid:d4ff892a-f10b-4de1-be89-b041442ab720 2020-07-11 02:16:05</a>
+<a class="sourceLine" id="cb139-183" data-line-number="183">## 177 urn:uuid:4935d63d-e0eb-408a-ab4d-d57bb320ba10 2020-07-11 02:11:49</a>
+<a class="sourceLine" id="cb139-184" data-line-number="184">## 178 urn:uuid:39205a88-3f2b-4e10-a213-ef85e9064dc7 2020-07-11 02:07:00</a>
+<a class="sourceLine" id="cb139-185" data-line-number="185">## 179 urn:uuid:c5cf0261-09e7-47e6-864a-abf2881e3107 2020-07-11 02:02:44</a>
+<a class="sourceLine" id="cb139-186" data-line-number="186">## 180 urn:uuid:8d58708c-31c0-4649-8600-dd8c2a5aaff3 2020-07-11 01:58:46</a>
+<a class="sourceLine" id="cb139-187" data-line-number="187">## 181 urn:uuid:f8eb2a12-f450-486f-86f8-d464fc97f360 2020-07-11 01:53:46</a>
+<a class="sourceLine" id="cb139-188" data-line-number="188">## 182 urn:uuid:7d72e5d6-2e93-4c0b-b89e-ad82e93bbe12 2020-07-11 01:48:33</a>
+<a class="sourceLine" id="cb139-189" data-line-number="189">## 183 urn:uuid:daa1a236-d426-4c62-8d4f-c4bb33b5e178 2020-07-11 01:45:28</a>
+<a class="sourceLine" id="cb139-190" data-line-number="190">## 184 urn:uuid:11c1f907-3c40-497c-91d5-1aab96ec203f 2020-07-11 01:42:16</a>
+<a class="sourceLine" id="cb139-191" data-line-number="191">## 185 urn:uuid:875da065-c3ae-4417-9b01-baddc7906729 2020-07-11 01:38:12</a>
+<a class="sourceLine" id="cb139-192" data-line-number="192">## 186 urn:uuid:b97c7029-f932-49b9-9a32-9bbd2e0080eb 2020-07-11 01:33:26</a>
+<a class="sourceLine" id="cb139-193" data-line-number="193">## 187 urn:uuid:b99c0d78-5494-4e38-a2f7-5c8410ed0723 2020-07-11 01:30:17</a>
+<a class="sourceLine" id="cb139-194" data-line-number="194">## 188 urn:uuid:3283a1a2-39d8-422f-b1b1-d9a995ce9731 2020-07-11 01:26:05</a>
+<a class="sourceLine" id="cb139-195" data-line-number="195">## 189 urn:uuid:34b308a3-14df-425d-a4b7-72d160f567e6 2020-07-11 01:22:47</a>
+<a class="sourceLine" id="cb139-196" data-line-number="196">## 190 urn:uuid:415e86a3-1f8b-468f-a84a-90d93b2b2b00 2020-07-11 01:18:55</a>
+<a class="sourceLine" id="cb139-197" data-line-number="197">## 191 urn:uuid:86739d9c-f59c-4d0c-b321-172cb504dd5a 2020-07-11 01:15:11</a>
+<a class="sourceLine" id="cb139-198" data-line-number="198">## 192 urn:uuid:ebbd600a-cafe-4d28-b79d-e23be79a2f00 2020-07-11 01:11:49</a>
+<a class="sourceLine" id="cb139-199" data-line-number="199">## 193 urn:uuid:996de036-eef0-4818-94d1-19017589358f 2020-07-11 01:08:30</a>
+<a class="sourceLine" id="cb139-200" data-line-number="200">## 194 urn:uuid:1cc2418f-9ec0-4524-a7c9-7d21d5b211d1 2020-07-11 01:05:07</a>
+<a class="sourceLine" id="cb139-201" data-line-number="201">## 195 urn:uuid:460dbce0-b7a1-42df-8576-4c9f9cb8dedb 2020-07-11 01:01:08</a>
+<a class="sourceLine" id="cb139-202" data-line-number="202">## 196 urn:uuid:d4e6101b-b13f-4952-8e57-382d9a654067 2020-07-11 00:57:30</a>
+<a class="sourceLine" id="cb139-203" data-line-number="203">## 197 urn:uuid:14ddf156-5bc2-46dc-b068-8a983e2ec46b 2020-07-11 00:53:17</a>
+<a class="sourceLine" id="cb139-204" data-line-number="204">## 198 urn:uuid:829c22c6-ea86-493a-a543-d92614e26a20 2020-07-11 00:49:46</a>
+<a class="sourceLine" id="cb139-205" data-line-number="205">## 199 urn:uuid:97600ebb-c750-4eca-9ef3-573732d7a4c1 2020-07-11 00:45:47</a>
+<a class="sourceLine" id="cb139-206" data-line-number="206">## 200 urn:uuid:d52ccc6d-d5ed-4025-a1e7-99c674bf8c71 2020-07-11 00:41:21</a>
+<a class="sourceLine" id="cb139-207" data-line-number="207">##            dateModified</a>
+<a class="sourceLine" id="cb139-208" data-line-number="208">## 1   2020-07-11 15:02:52</a>
+<a class="sourceLine" id="cb139-209" data-line-number="209">## 2   2020-07-11 14:59:18</a>
+<a class="sourceLine" id="cb139-210" data-line-number="210">## 3   2020-07-11 14:55:36</a>
+<a class="sourceLine" id="cb139-211" data-line-number="211">## 4   2020-07-11 14:52:03</a>
+<a class="sourceLine" id="cb139-212" data-line-number="212">## 5   2020-07-11 14:48:22</a>
+<a class="sourceLine" id="cb139-213" data-line-number="213">## 6   2020-07-11 14:44:32</a>
+<a class="sourceLine" id="cb139-214" data-line-number="214">## 7   2020-07-11 14:39:43</a>
+<a class="sourceLine" id="cb139-215" data-line-number="215">## 8   2020-07-11 14:35:39</a>
+<a class="sourceLine" id="cb139-216" data-line-number="216">## 9   2020-07-11 14:31:47</a>
+<a class="sourceLine" id="cb139-217" data-line-number="217">## 10  2020-07-11 14:28:17</a>
+<a class="sourceLine" id="cb139-218" data-line-number="218">## 11  2020-07-11 14:24:39</a>
+<a class="sourceLine" id="cb139-219" data-line-number="219">## 12  2020-07-11 14:19:24</a>
+<a class="sourceLine" id="cb139-220" data-line-number="220">## 13  2020-07-11 14:15:02</a>
+<a class="sourceLine" id="cb139-221" data-line-number="221">## 14  2020-07-11 14:10:05</a>
+<a class="sourceLine" id="cb139-222" data-line-number="222">## 15  2020-07-11 14:06:13</a>
+<a class="sourceLine" id="cb139-223" data-line-number="223">## 16  2020-07-11 14:01:28</a>
+<a class="sourceLine" id="cb139-224" data-line-number="224">## 17  2020-07-11 13:56:34</a>
+<a class="sourceLine" id="cb139-225" data-line-number="225">## 18  2020-07-11 13:52:05</a>
+<a class="sourceLine" id="cb139-226" data-line-number="226">## 19  2020-07-11 13:48:30</a>
+<a class="sourceLine" id="cb139-227" data-line-number="227">## 20  2020-07-11 13:44:38</a>
+<a class="sourceLine" id="cb139-228" data-line-number="228">## 21  2020-07-11 13:40:29</a>
+<a class="sourceLine" id="cb139-229" data-line-number="229">## 22  2020-07-11 13:35:53</a>
+<a class="sourceLine" id="cb139-230" data-line-number="230">## 23  2020-07-11 13:31:56</a>
+<a class="sourceLine" id="cb139-231" data-line-number="231">## 24  2020-07-11 13:27:31</a>
+<a class="sourceLine" id="cb139-232" data-line-number="232">## 25  2020-07-11 13:24:00</a>
+<a class="sourceLine" id="cb139-233" data-line-number="233">## 26  2020-07-11 13:20:16</a>
+<a class="sourceLine" id="cb139-234" data-line-number="234">## 27  2020-07-11 13:16:45</a>
+<a class="sourceLine" id="cb139-235" data-line-number="235">## 28  2020-07-11 13:13:23</a>
+<a class="sourceLine" id="cb139-236" data-line-number="236">## 29  2020-07-11 13:10:02</a>
+<a class="sourceLine" id="cb139-237" data-line-number="237">## 30  2020-07-11 13:06:16</a>
+<a class="sourceLine" id="cb139-238" data-line-number="238">## 31  2020-07-11 13:02:36</a>
+<a class="sourceLine" id="cb139-239" data-line-number="239">## 32  2020-07-11 12:58:51</a>
+<a class="sourceLine" id="cb139-240" data-line-number="240">## 33  2020-07-11 12:53:57</a>
+<a class="sourceLine" id="cb139-241" data-line-number="241">## 34  2020-07-11 12:48:57</a>
+<a class="sourceLine" id="cb139-242" data-line-number="242">## 35  2020-07-11 12:45:05</a>
+<a class="sourceLine" id="cb139-243" data-line-number="243">## 36  2020-07-11 12:41:19</a>
+<a class="sourceLine" id="cb139-244" data-line-number="244">## 37  2020-07-11 12:37:15</a>
+<a class="sourceLine" id="cb139-245" data-line-number="245">## 38  2020-07-11 12:33:06</a>
+<a class="sourceLine" id="cb139-246" data-line-number="246">## 39  2020-07-11 12:28:22</a>
+<a class="sourceLine" id="cb139-247" data-line-number="247">## 40  2020-07-11 12:24:45</a>
+<a class="sourceLine" id="cb139-248" data-line-number="248">## 41  2020-07-11 12:21:11</a>
+<a class="sourceLine" id="cb139-249" data-line-number="249">## 42  2020-07-11 12:17:17</a>
+<a class="sourceLine" id="cb139-250" data-line-number="250">## 43  2020-07-11 12:13:55</a>
+<a class="sourceLine" id="cb139-251" data-line-number="251">## 44  2020-07-11 12:10:26</a>
+<a class="sourceLine" id="cb139-252" data-line-number="252">## 45  2020-07-11 12:06:49</a>
+<a class="sourceLine" id="cb139-253" data-line-number="253">## 46  2020-07-11 12:02:42</a>
+<a class="sourceLine" id="cb139-254" data-line-number="254">## 47  2020-07-11 11:58:20</a>
+<a class="sourceLine" id="cb139-255" data-line-number="255">## 48  2020-07-11 11:54:01</a>
+<a class="sourceLine" id="cb139-256" data-line-number="256">## 49  2020-07-11 11:49:50</a>
+<a class="sourceLine" id="cb139-257" data-line-number="257">## 50  2020-07-11 11:45:55</a>
+<a class="sourceLine" id="cb139-258" data-line-number="258">## 51  2020-07-11 11:42:26</a>
+<a class="sourceLine" id="cb139-259" data-line-number="259">## 52  2020-07-11 11:39:03</a>
+<a class="sourceLine" id="cb139-260" data-line-number="260">## 53  2020-07-11 11:35:07</a>
+<a class="sourceLine" id="cb139-261" data-line-number="261">## 54  2020-07-11 11:31:01</a>
+<a class="sourceLine" id="cb139-262" data-line-number="262">## 55  2020-07-11 11:27:11</a>
+<a class="sourceLine" id="cb139-263" data-line-number="263">## 56  2020-07-11 11:23:50</a>
+<a class="sourceLine" id="cb139-264" data-line-number="264">## 57  2020-07-11 11:19:39</a>
+<a class="sourceLine" id="cb139-265" data-line-number="265">## 58  2020-07-11 11:16:17</a>
+<a class="sourceLine" id="cb139-266" data-line-number="266">## 59  2020-07-11 11:12:21</a>
+<a class="sourceLine" id="cb139-267" data-line-number="267">## 60  2020-07-11 11:08:20</a>
+<a class="sourceLine" id="cb139-268" data-line-number="268">## 61  2020-07-11 11:03:50</a>
+<a class="sourceLine" id="cb139-269" data-line-number="269">## 62  2020-07-11 10:59:04</a>
+<a class="sourceLine" id="cb139-270" data-line-number="270">## 63  2020-07-11 10:55:13</a>
+<a class="sourceLine" id="cb139-271" data-line-number="271">## 64  2020-07-11 10:51:36</a>
+<a class="sourceLine" id="cb139-272" data-line-number="272">## 65  2020-07-11 10:47:59</a>
+<a class="sourceLine" id="cb139-273" data-line-number="273">## 66  2020-07-11 10:43:15</a>
+<a class="sourceLine" id="cb139-274" data-line-number="274">## 67  2020-07-11 10:38:51</a>
+<a class="sourceLine" id="cb139-275" data-line-number="275">## 68  2020-07-11 10:33:50</a>
+<a class="sourceLine" id="cb139-276" data-line-number="276">## 69  2020-07-11 10:29:09</a>
+<a class="sourceLine" id="cb139-277" data-line-number="277">## 70  2020-07-11 10:24:51</a>
+<a class="sourceLine" id="cb139-278" data-line-number="278">## 71  2020-07-11 10:21:12</a>
+<a class="sourceLine" id="cb139-279" data-line-number="279">## 72  2020-07-11 10:16:57</a>
+<a class="sourceLine" id="cb139-280" data-line-number="280">## 73  2020-07-11 10:12:45</a>
+<a class="sourceLine" id="cb139-281" data-line-number="281">## 74  2020-07-11 10:08:21</a>
+<a class="sourceLine" id="cb139-282" data-line-number="282">## 75  2020-07-11 10:04:45</a>
+<a class="sourceLine" id="cb139-283" data-line-number="283">## 76  2020-07-11 10:00:02</a>
+<a class="sourceLine" id="cb139-284" data-line-number="284">## 77  2020-07-11 09:55:06</a>
+<a class="sourceLine" id="cb139-285" data-line-number="285">## 78  2020-07-11 09:51:38</a>
+<a class="sourceLine" id="cb139-286" data-line-number="286">## 79  2020-07-11 09:46:55</a>
+<a class="sourceLine" id="cb139-287" data-line-number="287">## 80  2020-07-11 09:43:08</a>
+<a class="sourceLine" id="cb139-288" data-line-number="288">## 81  2020-07-11 09:39:10</a>
+<a class="sourceLine" id="cb139-289" data-line-number="289">## 82  2020-07-11 09:35:16</a>
+<a class="sourceLine" id="cb139-290" data-line-number="290">## 83  2020-07-11 09:31:41</a>
+<a class="sourceLine" id="cb139-291" data-line-number="291">## 84  2020-07-11 09:27:56</a>
+<a class="sourceLine" id="cb139-292" data-line-number="292">## 85  2020-07-11 09:23:51</a>
+<a class="sourceLine" id="cb139-293" data-line-number="293">## 86  2020-07-11 09:20:24</a>
+<a class="sourceLine" id="cb139-294" data-line-number="294">## 87  2020-07-11 09:16:40</a>
+<a class="sourceLine" id="cb139-295" data-line-number="295">## 88  2020-07-11 09:11:42</a>
+<a class="sourceLine" id="cb139-296" data-line-number="296">## 89  2020-07-11 09:07:40</a>
+<a class="sourceLine" id="cb139-297" data-line-number="297">## 90  2020-07-11 09:04:06</a>
+<a class="sourceLine" id="cb139-298" data-line-number="298">## 91  2020-07-11 09:00:50</a>
+<a class="sourceLine" id="cb139-299" data-line-number="299">## 92  2020-07-11 08:57:25</a>
+<a class="sourceLine" id="cb139-300" data-line-number="300">## 93  2020-07-11 08:53:54</a>
+<a class="sourceLine" id="cb139-301" data-line-number="301">## 94  2020-07-11 08:50:20</a>
+<a class="sourceLine" id="cb139-302" data-line-number="302">## 95  2020-07-11 08:42:27</a>
+<a class="sourceLine" id="cb139-303" data-line-number="303">## 96  2020-07-11 08:26:49</a>
+<a class="sourceLine" id="cb139-304" data-line-number="304">## 97  2020-07-11 08:13:02</a>
+<a class="sourceLine" id="cb139-305" data-line-number="305">## 98  2020-07-11 08:09:47</a>
+<a class="sourceLine" id="cb139-306" data-line-number="306">## 99  2020-07-11 08:06:20</a>
+<a class="sourceLine" id="cb139-307" data-line-number="307">## 100 2020-07-11 08:02:38</a>
+<a class="sourceLine" id="cb139-308" data-line-number="308">## 101 2020-07-11 07:58:48</a>
+<a class="sourceLine" id="cb139-309" data-line-number="309">## 102 2020-07-11 07:54:20</a>
+<a class="sourceLine" id="cb139-310" data-line-number="310">## 103 2020-07-11 07:50:09</a>
+<a class="sourceLine" id="cb139-311" data-line-number="311">## 104 2020-07-11 07:46:42</a>
+<a class="sourceLine" id="cb139-312" data-line-number="312">## 105 2020-07-11 07:42:27</a>
+<a class="sourceLine" id="cb139-313" data-line-number="313">## 106 2020-07-11 07:38:53</a>
+<a class="sourceLine" id="cb139-314" data-line-number="314">## 107 2020-07-11 07:33:16</a>
+<a class="sourceLine" id="cb139-315" data-line-number="315">## 108 2020-07-11 07:29:56</a>
+<a class="sourceLine" id="cb139-316" data-line-number="316">## 109 2020-07-11 07:26:37</a>
+<a class="sourceLine" id="cb139-317" data-line-number="317">## 110 2020-07-11 07:23:02</a>
+<a class="sourceLine" id="cb139-318" data-line-number="318">## 111 2020-07-11 07:19:42</a>
+<a class="sourceLine" id="cb139-319" data-line-number="319">## 112 2020-07-11 07:16:01</a>
+<a class="sourceLine" id="cb139-320" data-line-number="320">## 113 2020-07-11 07:12:37</a>
+<a class="sourceLine" id="cb139-321" data-line-number="321">## 114 2020-07-11 07:09:13</a>
+<a class="sourceLine" id="cb139-322" data-line-number="322">## 115 2020-07-11 07:06:03</a>
+<a class="sourceLine" id="cb139-323" data-line-number="323">## 116 2020-07-11 07:02:46</a>
+<a class="sourceLine" id="cb139-324" data-line-number="324">## 117 2020-07-11 06:59:26</a>
+<a class="sourceLine" id="cb139-325" data-line-number="325">## 118 2020-07-11 06:55:40</a>
+<a class="sourceLine" id="cb139-326" data-line-number="326">## 119 2020-07-11 06:51:42</a>
+<a class="sourceLine" id="cb139-327" data-line-number="327">## 120 2020-07-11 06:48:02</a>
+<a class="sourceLine" id="cb139-328" data-line-number="328">## 121 2020-07-11 06:42:16</a>
+<a class="sourceLine" id="cb139-329" data-line-number="329">## 122 2020-07-11 06:36:54</a>
+<a class="sourceLine" id="cb139-330" data-line-number="330">## 123 2020-07-11 06:30:22</a>
+<a class="sourceLine" id="cb139-331" data-line-number="331">## 124 2020-07-11 06:25:28</a>
+<a class="sourceLine" id="cb139-332" data-line-number="332">## 125 2020-07-11 06:19:50</a>
+<a class="sourceLine" id="cb139-333" data-line-number="333">## 126 2020-07-11 06:15:23</a>
+<a class="sourceLine" id="cb139-334" data-line-number="334">## 127 2020-07-11 06:10:00</a>
+<a class="sourceLine" id="cb139-335" data-line-number="335">## 128 2020-07-11 06:05:21</a>
+<a class="sourceLine" id="cb139-336" data-line-number="336">## 129 2020-07-11 06:00:16</a>
+<a class="sourceLine" id="cb139-337" data-line-number="337">## 130 2020-07-11 05:55:26</a>
+<a class="sourceLine" id="cb139-338" data-line-number="338">## 131 2020-07-11 05:50:20</a>
+<a class="sourceLine" id="cb139-339" data-line-number="339">## 132 2020-07-11 05:45:59</a>
+<a class="sourceLine" id="cb139-340" data-line-number="340">## 133 2020-07-11 05:41:47</a>
+<a class="sourceLine" id="cb139-341" data-line-number="341">## 134 2020-07-11 05:35:59</a>
+<a class="sourceLine" id="cb139-342" data-line-number="342">## 135 2020-07-11 05:30:13</a>
+<a class="sourceLine" id="cb139-343" data-line-number="343">## 136 2020-07-11 05:26:22</a>
+<a class="sourceLine" id="cb139-344" data-line-number="344">## 137 2020-07-11 05:22:12</a>
+<a class="sourceLine" id="cb139-345" data-line-number="345">## 138 2020-07-11 05:17:54</a>
+<a class="sourceLine" id="cb139-346" data-line-number="346">## 139 2020-07-11 05:13:28</a>
+<a class="sourceLine" id="cb139-347" data-line-number="347">## 140 2020-07-11 05:09:32</a>
+<a class="sourceLine" id="cb139-348" data-line-number="348">## 141 2020-07-11 05:05:32</a>
+<a class="sourceLine" id="cb139-349" data-line-number="349">## 142 2020-07-11 05:01:43</a>
+<a class="sourceLine" id="cb139-350" data-line-number="350">## 143 2020-07-11 04:57:49</a>
+<a class="sourceLine" id="cb139-351" data-line-number="351">## 144 2020-07-11 04:52:35</a>
+<a class="sourceLine" id="cb139-352" data-line-number="352">## 145 2020-07-11 04:47:56</a>
+<a class="sourceLine" id="cb139-353" data-line-number="353">## 146 2020-07-11 04:41:28</a>
+<a class="sourceLine" id="cb139-354" data-line-number="354">## 147 2020-07-11 04:37:12</a>
+<a class="sourceLine" id="cb139-355" data-line-number="355">## 148 2020-07-11 04:29:48</a>
+<a class="sourceLine" id="cb139-356" data-line-number="356">## 149 2020-07-11 04:24:22</a>
+<a class="sourceLine" id="cb139-357" data-line-number="357">## 150 2020-07-11 04:20:35</a>
+<a class="sourceLine" id="cb139-358" data-line-number="358">## 151 2020-07-11 04:15:05</a>
+<a class="sourceLine" id="cb139-359" data-line-number="359">## 152 2020-07-11 04:10:02</a>
+<a class="sourceLine" id="cb139-360" data-line-number="360">## 153 2020-07-11 04:05:28</a>
+<a class="sourceLine" id="cb139-361" data-line-number="361">## 154 2020-07-11 04:01:04</a>
+<a class="sourceLine" id="cb139-362" data-line-number="362">## 155 2020-07-11 03:55:49</a>
+<a class="sourceLine" id="cb139-363" data-line-number="363">## 156 2020-07-11 03:50:18</a>
+<a class="sourceLine" id="cb139-364" data-line-number="364">## 157 2020-07-11 03:45:33</a>
+<a class="sourceLine" id="cb139-365" data-line-number="365">## 158 2020-07-11 03:40:21</a>
+<a class="sourceLine" id="cb139-366" data-line-number="366">## 159 2020-07-11 03:32:04</a>
+<a class="sourceLine" id="cb139-367" data-line-number="367">## 160 2020-07-11 03:27:58</a>
+<a class="sourceLine" id="cb139-368" data-line-number="368">## 161 2020-07-11 03:24:16</a>
+<a class="sourceLine" id="cb139-369" data-line-number="369">## 162 2020-07-11 03:20:26</a>
+<a class="sourceLine" id="cb139-370" data-line-number="370">## 163 2020-07-11 03:17:05</a>
+<a class="sourceLine" id="cb139-371" data-line-number="371">## 164 2020-07-11 03:13:28</a>
+<a class="sourceLine" id="cb139-372" data-line-number="372">## 165 2020-07-11 03:09:35</a>
+<a class="sourceLine" id="cb139-373" data-line-number="373">## 166 2020-07-11 03:05:27</a>
+<a class="sourceLine" id="cb139-374" data-line-number="374">## 167 2020-07-11 03:01:27</a>
+<a class="sourceLine" id="cb139-375" data-line-number="375">## 168 2020-07-11 02:56:46</a>
+<a class="sourceLine" id="cb139-376" data-line-number="376">## 169 2020-07-11 02:51:05</a>
+<a class="sourceLine" id="cb139-377" data-line-number="377">## 170 2020-07-11 02:46:53</a>
+<a class="sourceLine" id="cb139-378" data-line-number="378">## 171 2020-07-11 02:42:15</a>
+<a class="sourceLine" id="cb139-379" data-line-number="379">## 172 2020-07-11 02:33:33</a>
+<a class="sourceLine" id="cb139-380" data-line-number="380">## 173 2020-07-11 02:29:08</a>
+<a class="sourceLine" id="cb139-381" data-line-number="381">## 174 2020-07-11 02:24:32</a>
+<a class="sourceLine" id="cb139-382" data-line-number="382">## 175 2020-07-11 02:20:42</a>
+<a class="sourceLine" id="cb139-383" data-line-number="383">## 176 2020-07-11 02:16:05</a>
+<a class="sourceLine" id="cb139-384" data-line-number="384">## 177 2020-07-11 02:11:49</a>
+<a class="sourceLine" id="cb139-385" data-line-number="385">## 178 2020-07-11 02:07:00</a>
+<a class="sourceLine" id="cb139-386" data-line-number="386">## 179 2020-07-11 02:02:44</a>
+<a class="sourceLine" id="cb139-387" data-line-number="387">## 180 2020-07-11 01:58:46</a>
+<a class="sourceLine" id="cb139-388" data-line-number="388">## 181 2020-07-11 01:53:46</a>
+<a class="sourceLine" id="cb139-389" data-line-number="389">## 182 2020-07-11 01:48:33</a>
+<a class="sourceLine" id="cb139-390" data-line-number="390">## 183 2020-07-11 01:45:28</a>
+<a class="sourceLine" id="cb139-391" data-line-number="391">## 184 2020-07-11 01:42:16</a>
+<a class="sourceLine" id="cb139-392" data-line-number="392">## 185 2020-07-11 01:38:12</a>
+<a class="sourceLine" id="cb139-393" data-line-number="393">## 186 2020-07-11 01:33:26</a>
+<a class="sourceLine" id="cb139-394" data-line-number="394">## 187 2020-07-11 01:30:17</a>
+<a class="sourceLine" id="cb139-395" data-line-number="395">## 188 2020-07-11 01:26:05</a>
+<a class="sourceLine" id="cb139-396" data-line-number="396">## 189 2020-07-11 01:22:47</a>
+<a class="sourceLine" id="cb139-397" data-line-number="397">## 190 2020-07-11 01:18:55</a>
+<a class="sourceLine" id="cb139-398" data-line-number="398">## 191 2020-07-11 01:15:11</a>
+<a class="sourceLine" id="cb139-399" data-line-number="399">## 192 2020-07-11 01:11:49</a>
+<a class="sourceLine" id="cb139-400" data-line-number="400">## 193 2020-07-11 01:08:30</a>
+<a class="sourceLine" id="cb139-401" data-line-number="401">## 194 2020-07-11 01:05:07</a>
+<a class="sourceLine" id="cb139-402" data-line-number="402">## 195 2020-07-11 01:01:08</a>
+<a class="sourceLine" id="cb139-403" data-line-number="403">## 196 2020-07-11 00:57:30</a>
+<a class="sourceLine" id="cb139-404" data-line-number="404">## 197 2020-07-11 00:53:17</a>
+<a class="sourceLine" id="cb139-405" data-line-number="405">## 198 2020-07-11 00:49:46</a>
+<a class="sourceLine" id="cb139-406" data-line-number="406">## 199 2020-07-11 00:45:47</a>
+<a class="sourceLine" id="cb139-407" data-line-number="407">## 200 2020-07-11 00:41:21</a></code></pre></div>
+</div>
+<div id="use-facets-1" class="section level3">
+<h3>Use facets</h3>
+<p>All resource maps with &gt; 100 data objects that are <em>not</em> on the Arctic Data Center:</p>
+<pre><code>https://cn.dataone.org/cn/v2/query/solr/?q=resourceMap:*+AND+-datasource:*ARCTIC*&amp;rows=0&amp;facet=true&amp;facet.field=resourceMap&amp;facet.mincount=100</code></pre>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="use-stats.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="more-resources.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
